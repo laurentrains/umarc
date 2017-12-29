@@ -12,20 +12,49 @@ body {
   font-size: $base-font-size;
 }
 
+.container {
+  display: block;
+  margin: 0 auto;
+  max-width: $container-width;
+  width: 100%;
+}
+
 h1 {
+  font-size: 40px;
   font-weight: 300;
-  margin-bottom: $space;
+  padding-bottom: $standard-padding;
 }
 
 h2 {
   font-size: $large-font-size;
-  margin-bottom: $space;
+  padding-bottom: $standard-padding/3;
+  font-weight: 100;
 }
 
-p {
-  margin-bottom: $space;
+ul {
+  margin: 0;
+}
+
+li {
+  font-size: $base-font-size;
 }
 
 a {
   color: black;
+  outline: none;
+}
+
+p {
+  font-size: $base-font-size;
+  line-height: $standard-padding*1.2;
+  margin: 0;
+}
+
+button {
+  color: $white;
+  background-color: $primary-color;
+  margin-top: $standard-padding;
+  padding: $standard-padding/2 $standard-padding;
+  outline: none;
+  border: none;
 }

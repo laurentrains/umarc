@@ -1,0 +1,37 @@
+#navigation {
+  background-color: $white;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  img {
+    float: left;
+    width: 283px;
+    padding-left: $standard-padding;
+    padding-top: 17px;
+    @media screen and (max-width: $small) {
+      padding-bottom: $standard-padding/2;
+    }
+  }
+  ul {
+    float: right;
+  }
+  li {
+    background-color: $primary-color;
+    color: $white;
+    list-style: none;
+    padding: $standard-padding/1.5 $standard-padding;
+    pointer: cursor;
+    @media screen and (max-width: $small) {
+      display: none;
+    }
+  }
+}
+
+#footer {
+  background-color: $primary-color;
+  color: $white;
+  padding: $standard-padding/1.5;
+  text-align: center;
+}

@@ -1,0 +1,9 @@
+#distributors {
+  background-color: $background-2;
+  padding: $area-padding;
+  img {
+    @media screen and (max-width: $small) {
+      padding-bottom: $standard-padding;
+    }
+  }
+}

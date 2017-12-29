@@ -1,0 +1,10 @@
+#faq {
+  padding: $area-padding;
+  .question-area {
+    padding-bottom: $standard-padding;
+  }
+  .question {
+    font-weight: bold;
+    padding-bottom: $standard-padding/2;
+  }
+}
