@@ -41,11 +41,12 @@ li {
 
 a {
   color: black;
+  outline: none;
 }
 
 p {
   font-size: $base-font-size;
-  line-height: $standard-padding;
+  line-height: $standard-padding*1.2;
   margin: 0;
 }
 

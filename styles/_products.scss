@@ -4,6 +4,9 @@
   img {
     width: 100%;
     max-width: 500px;
+    @media screen and (max-width: $small) {
+      padding-bottom: $standard-padding;
+    }
   }
   .product {
     padding-bottom: $standard-padding*2;

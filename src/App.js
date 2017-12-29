@@ -5,7 +5,7 @@ const App = () => (
     <div id="navigation">
       <img src="/umark_logo.svg" />
       <ul>
-        <a href="">
+        <a href="#distributors">
           <li>Find Distributors</li>
         </a>
       </ul>
@@ -17,7 +17,7 @@ const App = () => (
 
     <div id="about">
       <div className="container">
-        <h1>About Umarc</h1>
+        <h1>About U'Marc</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut nibh risus. Aenean
           mattis interdum lorem vitae eleifend. Duis id pharetra libero, ut sodales nisl. Praesent
@@ -31,11 +31,11 @@ const App = () => (
     <div id="products">
       <div className="container product">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6">
             <img src="/umarc_white.png" />
           </div>
-          <div className="col">
-            <h2>White Umarc</h2>
+          <div className="col-12 col-md-6">
+            <h2>White U'Marc</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut nibh risus.
               Aenean mattis interdum lorem vitae eleifend. Duis id pharetra libero, ut sodales nisl.
@@ -49,11 +49,11 @@ const App = () => (
       </div>
       <div className="container product">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6">
             <img src="/umarc_orange.png" />
           </div>
-          <div className="col">
-            <h2>Orange Umarc</h2>
+          <div className="col-12 col-md-6">
+            <h2>Orange U'Marc</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut nibh risus.
               Aenean mattis interdum lorem vitae eleifend. Duis id pharetra libero, ut sodales nisl.
@@ -136,7 +136,7 @@ const App = () => (
       </div>
     </div>
     <div id="footer">
-      <p>© 2017 UMarc</p>
+      <p>© 2017 U'Marc</p>
     </div>
   </div>
 );
