@@ -1,0 +1,24 @@
+#contact {
+  background-image: url("/contact_bg.jpg");
+  color: $white;
+  padding: $area-padding;
+  input,
+  textarea {
+    border: none;
+    padding: $standard-padding/2;
+    width: 100%;
+    outline: none;
+    margin-bottom: $standard-padding;
+  }
+  textarea {
+    height: 200px;
+  }
+  input[type="submit"] {
+    background-color: $primary-color;
+    color: $white;
+    max-width: 400px;
+  }
+  label {
+    display: block;
+  }
+}

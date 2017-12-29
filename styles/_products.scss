@@ -1,0 +1,14 @@
+#products {
+  background-color: $background-2;
+  padding: $area-padding;
+  img {
+    width: 100%;
+    max-width: 500px;
+  }
+  .product {
+    padding-bottom: $standard-padding*2;
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+}
