@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './ContactForm';
 
 const App = () => (
   <div>
@@ -109,32 +110,8 @@ const App = () => (
       </div>
     </div>
 
-    <div id="contact">
-      <div className="container">
-        <h1>Contact Us</h1>
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <label>Name</label>
-            <input type="text" placeholder="Name here" />
-          </div>
-          <div className="col-12 col-md-6">
-            <label>Email</label>
-            <input type="text" placeholder="Email here" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <label>Message</label>
-            <textarea placeholder="Type here" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <input type="submit" value="Submit" />
-          </div>
-        </div>
-      </div>
-    </div>
+    <ContactForm />
+
     <div id="footer">
       <p>© 2017 U'Marc</p>
     </div>
