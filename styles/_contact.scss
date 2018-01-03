@@ -15,11 +15,22 @@
     resize: none;
   }
   input[type="submit"] {
+    cursor: pointer;
     background-color: $primary-color;
     color: $white;
     max-width: 400px;
+    transition: 0.5s;
+    &:hover {
+      background-color: $primary-color-light;
+    }
+    &:focus {
+      background-color: $primary-color-dark;
+    }
   }
   label {
     display: block;
+  }
+  #recaptcha {
+    margin-bottom: $standard-padding;
   }
 }
