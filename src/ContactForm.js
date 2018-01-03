@@ -104,10 +104,12 @@ export default class ContactForm extends React.Component {
                 <textarea onChange={this.storeMessage} placeholder="Type here" />
               </div>
             </div>
-            <ReCAPTCHA
-              sitekey="6LfTnD4UAAAAAKvNYLH2BLriDRk0t29YFqQVGBdp"
-              onChange={this.storeCaptcha}
-            />
+            <div id="recaptcha">
+              <ReCAPTCHA
+                sitekey="6LfTnD4UAAAAAKvNYLH2BLriDRk0t29YFqQVGBdp"
+                onChange={this.storeCaptcha}
+              />
+            </div>
             <div className="row">
               <div className="col">
                 <input type="submit" value="Submit" />
