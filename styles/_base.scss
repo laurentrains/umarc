@@ -4,6 +4,7 @@
 }
 
 html {
+  font-family: $base-font-family;
   font-size: 62.5%;
 }
 
@@ -20,37 +21,44 @@ body {
 }
 
 h1 {
+  font-family: $base-font-family;
   font-size: 40px;
   font-weight: 300;
   padding-bottom: $standard-padding;
 }
 
 h2 {
+  font-family: $base-font-family;
   font-size: $large-font-size;
   padding-bottom: $standard-padding/3;
   font-weight: 100;
 }
 
 ul {
+  font-family: $base-font-family;
   margin: 0;
 }
 
 li {
+  font-family: $base-font-family;
   font-size: $base-font-size;
 }
 
 a {
+  font-family: $base-font-family;
   color: black;
   outline: none;
 }
 
 p {
+  font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $standard-padding*1.2;
   margin: 0;
 }
 
 button {
+  font-family: $base-font-family;
   color: $white;
   background-color: $primary-color;
   margin-top: $standard-padding;
