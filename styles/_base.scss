@@ -47,7 +47,7 @@ li {
 a {
   font-family: $base-font-family;
   color: black;
-  outline: none;
+  outline: none !important;
 }
 
 p {
@@ -60,9 +60,16 @@ p {
 button {
   font-family: $base-font-family;
   color: $white;
+  cursor: pointer;
   background-color: $primary-color;
   margin-top: $standard-padding;
-  padding: $standard-padding/2 $standard-padding;
-  outline: none;
+  padding: $standard-padding/1.5 $standard-padding;
+  outline: none !important;
   border: none;
+  &:hover {
+    background-color: $primary-color-light;
+  }
+  &:focus {
+    background-color: $primary-color-dark;
+  }
 }

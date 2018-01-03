@@ -5,7 +5,8 @@
   input,
   textarea {
     border: none;
-    padding: $standard-padding/2;
+    border-radius: 0;
+    padding: $standard-padding/1.5;
     width: 100%;
     outline: none;
     margin-bottom: $standard-padding;

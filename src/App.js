@@ -1,5 +1,6 @@
 import React from 'react';
 import ContactForm from './ContactForm';
+import Scroll from 'react-scroll-to-element';
 
 const App = () => (
   <div>
@@ -42,9 +43,9 @@ const App = () => (
               Aenean mattis interdum lorem vitae eleifend. Duis id pharetra libero, ut sodales nisl.
               Praesent interdum, ligua nec imperdiet bibendum, nulla{' '}
             </p>
-            <a href="#distributors">
+            <Scroll type="id" offset={200} element="distributors">
               <button>Find Distributors</button>
-            </a>
+            </Scroll>
           </div>
         </div>
       </div>
@@ -60,9 +61,9 @@ const App = () => (
               Aenean mattis interdum lorem vitae eleifend. Duis id pharetra libero, ut sodales nisl.
               Praesent interdum, ligua nec imperdiet bibendum, nulla{' '}
             </p>
-            <a href="#distributors">
+            <Scroll type="id" offset={200} element="distributors">
               <button>Find Distributors</button>
-            </a>
+            </Scroll>
           </div>
         </div>
       </div>
