@@ -9,11 +9,9 @@ export default class ContactForm extends React.Component {
 
     this.state = {
       name: '',
-      validName: false,
       email: '',
       validEmail: false,
       message: '',
-      validMessage: false,
       sendStatus: 'Submit',
       captchaResponse: '',
     };
@@ -22,33 +20,27 @@ export default class ContactForm extends React.Component {
   }
 
   storeCaptcha(captchaValue) {
-    this.setState({ captchaResponse: captchaValue });
+    const newState = {
+      captchaResponse: captchaValue,
+    };
+
+    if (this.state.sendStatus === 'Error: No Recaptcha') {
+      newState.sendStatus = 'Submit';
+    }
+
+    this.setState(newState);
   }
 
   storeName(e) {
     const name = e.target.value;
-    let validName = true;
-
-    const nameSchema = new SimpleSchema({
-      name: {
-        type: String,
-        min: 1,
-        max: 100,
-      },
-    });
-
-    try {
-      nameSchema.validate({ name });
-    } catch (ex) {
-      validName = false;
-    }
-
-    this.setState({ name, validName });
+    this.setState({ name });
   }
 
   storeEmail(e) {
-    const email = e.target.value;
-    let validEmail = true;
+    const newState = {
+      email: e.target.value,
+      validEmail: true,
+    };
 
     const emailSchema = new SimpleSchema({
       email: {
@@ -58,37 +50,34 @@ export default class ContactForm extends React.Component {
     });
 
     try {
-      emailSchema.validate({ email });
+      emailSchema.validate({ email: newState.email });
+      if (this.state.sendStatus === 'Error: Invalid Email') {
+        newState.sendStatus = 'Submit';
+      }
     } catch (ex) {
-      validEmail = false;
+      newState.validEmail = false;
     }
 
-    this.setState({ email, validEmail });
+    this.setState(newState);
   }
 
   storeMessage(e) {
     const message = e.target.value.substring(0, 500);
-    let validMessage = true;
-
-    const messageSchema = new SimpleSchema({
-      message: {
-        type: String,
-        min: 1,
-        max: 500,
-      },
-    });
-
-    try {
-      messageSchema.validate({ message });
-    } catch (ex) {
-      validMessage = false;
-    }
-
-    this.setState({ message, validMessage });
+    this.setState({ message });
   }
 
-  sendSupportRequest(e) {
+  submitEmail(e) {
     e.preventDefault();
+
+    if (!this.state.validEmail) {
+      this.setState({ sendStatus: 'Error: Invalid Email' });
+      return;
+    }
+
+    if (!this.state.captchaResponse) {
+      this.setState({ sendStatus: 'Error: No Recaptcha' });
+      return;
+    }
 
     this.setState({ sendStatus: 'Sending...' });
 
@@ -120,44 +109,30 @@ export default class ContactForm extends React.Component {
         this.setState({ sendStatus: 'Message Sent' });
       })
       .catch((err) => {
-        console.error(err);
+        this.setState({ sendStatus: 'Error sending message' });
       });
   }
 
   render() {
     return (
       <div id="contact">
-        <form onSubmit={this.sendSupportRequest}>
+        <form onSubmit={this.submitEmail}>
           <div className="container">
             <h1>Contact Us</h1>
             <div className="row">
               <div className="col-12 col-md-6">
                 <label>Name</label>
-                <input
-                  style={this.state.validName ? {} : { background: '#ffaaaa' }}
-                  onChange={this.storeName}
-                  type="text"
-                  placeholder="Name here"
-                />
+                <input onChange={this.storeName} type="text" placeholder="Name here" />
               </div>
               <div className="col-12 col-md-6">
                 <label>Email</label>
-                <input
-                  style={this.state.validEmail ? {} : { background: '#ffaaaa' }}
-                  onChange={this.storeEmail}
-                  type="text"
-                  placeholder="Email here"
-                />
+                <input onChange={this.storeEmail} type="text" placeholder="Email here" />
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <label>Message</label>
-                <textarea
-                  style={this.state.validMessage ? {} : { background: '#ffaaaa' }}
-                  onChange={this.storeMessage}
-                  placeholder="Type here"
-                />
+                <textarea onChange={this.storeMessage} placeholder="Type here" />
               </div>
             </div>
             <div id="recaptcha">
