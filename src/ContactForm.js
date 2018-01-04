@@ -1,6 +1,7 @@
 import React from 'react';
 import autobind from 'react-autobind';
 import ReCAPTCHA from 'react-google-recaptcha';
+import SimpleSchema from 'simpl-schema';
 
 export default class ContactForm extends React.Component {
   constructor(props) {
@@ -8,31 +9,82 @@ export default class ContactForm extends React.Component {
 
     this.state = {
       name: '',
+      validName: false,
       email: '',
+      validEmail: false,
       message: '',
+      validMessage: false,
       sendStatus: 'Submit',
       captchaResponse: '',
-      dialog: false,
     };
 
     autobind(this);
   }
 
   storeCaptcha(captchaValue) {
-    console.log(captchaValue);
     this.setState({ captchaResponse: captchaValue });
   }
 
   storeName(e) {
-    this.setState({ name: e.target.value });
+    const name = e.target.value;
+    let validName = true;
+
+    const nameSchema = new SimpleSchema({
+      name: {
+        type: String,
+        min: 1,
+        max: 100,
+      },
+    });
+
+    try {
+      nameSchema.validate({ name });
+    } catch (ex) {
+      validName = false;
+    }
+
+    this.setState({ name, validName });
   }
 
   storeEmail(e) {
-    this.setState({ email: e.target.value });
+    const email = e.target.value;
+    let validEmail = true;
+
+    const emailSchema = new SimpleSchema({
+      email: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Email,
+      },
+    });
+
+    try {
+      emailSchema.validate({ email });
+    } catch (ex) {
+      validEmail = false;
+    }
+
+    this.setState({ email, validEmail });
   }
 
   storeMessage(e) {
-    this.setState({ message: e.target.value });
+    const message = e.target.value.substring(0, 500);
+    let validMessage = true;
+
+    const messageSchema = new SimpleSchema({
+      message: {
+        type: String,
+        min: 1,
+        max: 500,
+      },
+    });
+
+    try {
+      messageSchema.validate({ message });
+    } catch (ex) {
+      validMessage = false;
+    }
+
+    this.setState({ message, validMessage });
   }
 
   sendSupportRequest(e) {
@@ -81,17 +133,31 @@ export default class ContactForm extends React.Component {
             <div className="row">
               <div className="col-12 col-md-6">
                 <label>Name</label>
-                <input onChange={this.storeName} type="text" placeholder="Name here" />
+                <input
+                  style={this.state.validName ? {} : { background: '#ffaaaa' }}
+                  onChange={this.storeName}
+                  type="text"
+                  placeholder="Name here"
+                />
               </div>
               <div className="col-12 col-md-6">
                 <label>Email</label>
-                <input onChange={this.storeEmail} type="text" placeholder="Email here" />
+                <input
+                  style={this.state.validEmail ? {} : { background: '#ffaaaa' }}
+                  onChange={this.storeEmail}
+                  type="text"
+                  placeholder="Email here"
+                />
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <label>Message</label>
-                <textarea onChange={this.storeMessage} placeholder="Type here" />
+                <textarea
+                  style={this.state.validMessage ? {} : { background: '#ffaaaa' }}
+                  onChange={this.storeMessage}
+                  placeholder="Type here"
+                />
               </div>
             </div>
             <div id="recaptcha">

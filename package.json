@@ -33,6 +33,7 @@
     "react-async-script": "^0.9.1",
     "react-autobind": "^1.0.6",
     "react-google-recaptcha": "^0.9.9",
-    "react-scroll-to-element": "^0.2.0"
+    "react-scroll-to-element": "^0.2.0",
+    "simpl-schema": "^1.4.0"
   }
 }
