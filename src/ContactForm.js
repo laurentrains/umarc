@@ -1,6 +1,7 @@
 import React from 'react';
 import autobind from 'react-autobind';
 import ReCAPTCHA from 'react-google-recaptcha';
+import SimpleSchema from 'simpl-schema';
 
 export default class ContactForm extends React.Component {
   constructor(props) {
@@ -9,34 +10,74 @@ export default class ContactForm extends React.Component {
     this.state = {
       name: '',
       email: '',
+      validEmail: false,
       message: '',
       sendStatus: 'Submit',
       captchaResponse: '',
-      dialog: false,
     };
 
     autobind(this);
   }
 
   storeCaptcha(captchaValue) {
-    console.log(captchaValue);
-    this.setState({ captchaResponse: captchaValue });
+    const newState = {
+      captchaResponse: captchaValue,
+    };
+
+    if (this.state.sendStatus === 'Error: No Recaptcha') {
+      newState.sendStatus = 'Submit';
+    }
+
+    this.setState(newState);
   }
 
   storeName(e) {
-    this.setState({ name: e.target.value });
+    const name = e.target.value;
+    this.setState({ name });
   }
 
   storeEmail(e) {
-    this.setState({ email: e.target.value });
+    const newState = {
+      email: e.target.value,
+      validEmail: true,
+    };
+
+    const emailSchema = new SimpleSchema({
+      email: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Email,
+      },
+    });
+
+    try {
+      emailSchema.validate({ email: newState.email });
+      if (this.state.sendStatus === 'Error: Invalid Email') {
+        newState.sendStatus = 'Submit';
+      }
+    } catch (ex) {
+      newState.validEmail = false;
+    }
+
+    this.setState(newState);
   }
 
   storeMessage(e) {
-    this.setState({ message: e.target.value });
+    const message = e.target.value.substring(0, 500);
+    this.setState({ message });
   }
 
-  sendSupportRequest(e) {
+  submitEmail(e) {
     e.preventDefault();
+
+    if (!this.state.validEmail) {
+      this.setState({ sendStatus: 'Error: Invalid Email' });
+      return;
+    }
+
+    if (!this.state.captchaResponse) {
+      this.setState({ sendStatus: 'Error: No Recaptcha' });
+      return;
+    }
 
     this.setState({ sendStatus: 'Sending...' });
 
@@ -68,14 +109,14 @@ export default class ContactForm extends React.Component {
         this.setState({ sendStatus: 'Message Sent' });
       })
       .catch((err) => {
-        console.error(err);
+        this.setState({ sendStatus: 'Error sending message' });
       });
   }
 
   render() {
     return (
       <div id="contact">
-        <form onSubmit={this.sendSupportRequest}>
+        <form onSubmit={this.submitEmail}>
           <div className="container">
             <h1>Contact Us</h1>
             <div className="row">
