@@ -10,7 +10,7 @@ export default class ContactForm extends React.Component {
       name: '',
       email: '',
       message: '',
-      response: '',
+      sendStatus: 'Submit',
       captchaResponse: '',
       dialog: false,
     };
@@ -35,15 +35,10 @@ export default class ContactForm extends React.Component {
     this.setState({ message: e.target.value });
   }
 
-  handleClose() {
-    console.log('dialog close invoked');
-    this.setState({ dialog: false });
-  }
-
   sendSupportRequest(e) {
     e.preventDefault();
-    console.log('submit pressed');
-    console.log(this.state);
+
+    this.setState({ sendStatus: 'Sending...' });
 
     fetch('https://92kcwq3cr3.execute-api.us-west-2.amazonaws.com/prod/umarc-email', {
       credentials: 'omit',
@@ -65,20 +60,15 @@ export default class ContactForm extends React.Component {
     })
       .then((res) => {
         if (res.status !== 200) {
-          console.log('not fetch');
-          this.setState({ response: 'Error in sending the support request!!', dialog: true });
+          this.setState({ sendStatus: 'Error sending message' });
         }
         return res.json();
       })
       .then((json) => {
-        console.log('success', json);
-        this.setState({
-          response: 'Message Sent :)',
-          dialog: true,
-        });
+        this.setState({ sendStatus: 'Message Sent' });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -112,7 +102,7 @@ export default class ContactForm extends React.Component {
             </div>
             <div className="row">
               <div className="col">
-                <input type="submit" value="Submit" />
+                <input type="submit" value={this.state.sendStatus} />
               </div>
             </div>
           </div>
