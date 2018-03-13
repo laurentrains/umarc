@@ -7,7 +7,7 @@ function sendEmail(body, callback) {
 
   const mailParams = {
     Destination: {
-      ToAddresses: ['test@hovalabs.com'],
+      ToAddresses: ['info@medicunique.com'],
     },
     Message: {
       Body: {
@@ -22,7 +22,7 @@ function sendEmail(body, callback) {
         Data: body.subjectdata,
       },
     },
-    Source: 'test@hovalabs.com',
+    Source: 'info@medicunique.com',
     ReplyToAddresses: body.replyToAddresses,
   };
 
